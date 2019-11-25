@@ -11,11 +11,13 @@ public class Console {
     }
 
     public  String read() {
-        return scanner.next();
+        return scanner.nextLine();
 
     }
 
     public int readInt() {
-        return scanner.nextInt();
+        int value = scanner.nextInt();
+        scanner.nextLine();
+        return value;
     }
 }

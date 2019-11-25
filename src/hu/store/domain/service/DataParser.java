@@ -26,8 +26,15 @@ public class DataParser {
     }
 
     private Cart createCart(List<String> items) {
-        int totalValue = 0;
-        return new Cart(++id, createGoodsMap(items), totalValue);
+        Map<String, Long> goodsMap = createGoodsMap(items);
+        int totalValue = calculateTotalValue(goodsMap);
+        return new Cart(++id, goodsMap, totalValue);
+    }
+
+    private int calculateTotalValue(Map<String, Long> goodsMap){
+        return goodsMap.values().stream()
+                .mapToInt(ValueCalculator::calculate)
+                .sum();
     }
 
     private Map<String , Long> createGoodsMap(List<String> cartitems){
